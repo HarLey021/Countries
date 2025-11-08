@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+#root,
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+@theme {
+  --font-weight-ultraLight: 300;
+  --font-weight-light: 400;
+  --font-weight-normal: 600;
+  --font-weight-bold: 800;
+
+  --color-light-grey: #fafafa;
+  --color-normal-grey: #2b3844;
+  --color-dark-grey: #202c36;
+
+  --color-black: #111517;
+}
