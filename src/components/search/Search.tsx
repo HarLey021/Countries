@@ -1,19 +1,66 @@
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { MainContext } from "../../contexts/mainContext";
+import { useNavigate } from "react-router-dom";
+
 const Search: React.FC = () => {
+  const { countries } = useContext<MainContextType>(MainContext);
+  const navigate = useNavigate();
+  const schema = yup.object({
+    name: yup
+      .string()
+      .test("Country exists", "Enter correct name", (country) => {
+        if (!country) {
+          return true;
+        }
+        return countries.some(
+          (c) => c.name.common.toLowerCase() === country.toLowerCase()
+        );
+      }),
+  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const inputSubmit = (data: { name?: string | undefined }) => {
+    const foundCountry = countries.find(
+      (country) =>
+        country.name.common.toLowerCase() === data.name?.toLowerCase()
+    );
+    if (foundCountry) {
+      navigate(`/${encodeURIComponent(foundCountry.name.common)}`);
+      reset();
+    }
+  };
+
   return (
     <>
-      <div className="w-full h-[48px] relative mb-[40px]">
-        <input
-          name="country"
-          placeholder="Search for a country…"
-          className="w-full h-full rounded-[5px] bg-white dark:bg-normal-grey shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] placeholder:text-[12px] placeholder:font-light placeholder:text-[#C4C4C4] pl-[75px]"
-        />
+      <div className="w-full h-[48px] relative mb-[40px] lg:w-[480px] lg:h-[56px] lg:m-0">
+        <form className="w-full h-full" onSubmit={handleSubmit(inputSubmit)}>
+          <input
+            type="text"
+            placeholder="Search for a country…"
+            className="w-full h-full rounded-[5px] bg-white dark:bg-normal-grey shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] placeholder:text-[12px] placeholder:font-light placeholder:text-[#C4C4C4] pl-[75px] pr-[30px] text-black dark:text-white font-normal text-[16px] lg:placeholder:text-[14px] cursor-pointer"
+            {...register("name")}
+          />
+          {errors.name && (
+            <p className="text-red-600 font-normal absolute top-[12px] right-[30px]">
+              {errors.name.message}!
+            </p>
+          )}
+        </form>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="16"
           viewBox="0 0 16 16"
           fill="none"
-          className="absolute top-[16px] left-[32px]"
+          className="absolute top-[16px] left-[32px] lg:top-[19px] lg:w-[18px] lg:h-[18px] cursor-pointer"
         >
           <path
             fillRule="evenodd"

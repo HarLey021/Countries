@@ -16,9 +16,11 @@ body {
   --font-weight-normal: 600;
   --font-weight-bold: 800;
 
-  --color-light-grey: #fafafa;
-  --color-normal-grey: #2b3844;
-  --color-dark-grey: #202c36;
+  --background-color-light-grey: #fafafa;
+  --background-color-normal-grey: #2b3844;
+  --background-color-dark-grey: #202c36;
 
   --color-black: #111517;
+
+  --breakpoint-lg: 1440px;
 }

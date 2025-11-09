@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { MainContext } from "../../contexts/mainContext";
 
 const Filter: React.FC = () => {
+  const { setRegion } = useContext<MainContextType>(MainContext);
   const [showFilter, setShowFilter] = useState<boolean>(false);
+
   return (
     <>
       <div className="relative">
@@ -9,9 +12,9 @@ const Filter: React.FC = () => {
           onClick={() => {
             setShowFilter(!showFilter);
           }}
-          className="w-[200px] h-[48px] rounded-[5px] bg-[white] dark:bg-normal-grey shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] px-[24px] py-[14px] flex justify-between items-center mb-[4px]"
+          className="w-[200px] h-[48px] rounded-[5px] bg-[white] dark:bg-normal-grey shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] px-[24px] py-[14px] flex justify-between items-center mb-[4px] lg:h-[56px] lg:m-0 cursor-pointer"
         >
-          <span className=" text-black text-[12px] font-light dark:text-white">
+          <span className=" text-black text-[12px] font-light dark:text-white lg:text-[14px]">
             Filter by Region
           </span>
           <svg
@@ -20,6 +23,7 @@ const Filter: React.FC = () => {
             height="10"
             viewBox="0 0 10 10"
             fill="none"
+            className="lg:w-[12px] lg:h-[12px]"
           >
             <path
               fillRule="evenodd"
@@ -31,12 +35,55 @@ const Filter: React.FC = () => {
           </svg>
         </button>
         {showFilter && (
-          <div className="w-[200px] h-[144px] bg-white rounded-[5px] shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] dark:bg-normal-grey px-[24px] py-[16px] z-5 text-[12px] font-light text-black dark:text-[white] flex flex-col justify-between items-start absolute top-[52px]">
-            <button>Africa</button>
-            <button>America</button>
-            <button>Asia</button>
-            <button>Europe</button>
-            <button>Oceania</button>
+          <div className="w-[200px] h-[164px] bg-white rounded-[5px] shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] dark:bg-normal-grey px-[24px] py-[16px] z-5 text-[12px] font-light text-black dark:text-[white] flex flex-col justify-between items-start absolute top-[60px] lg:text-[14px] cursor-pointer">
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setRegion(""), setShowFilter(false);
+              }}
+            >
+              All
+            </button>
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setRegion("Africa"), setShowFilter(false);
+              }}
+            >
+              Africa
+            </button>
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setRegion("Americas"), setShowFilter(false);
+              }}
+            >
+              America
+            </button>
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setRegion("Asia"), setShowFilter(false);
+              }}
+            >
+              Asia
+            </button>
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setRegion("Europe"), setShowFilter(false);
+              }}
+            >
+              Europe
+            </button>
+            <button
+              className="cursor-pointer"
+              onClick={() => {
+                setRegion("Oceania"), setShowFilter(false);
+              }}
+            >
+              Oceania
+            </button>
           </div>
         )}
       </div>

@@ -8,7 +8,7 @@ const Country: React.FC<CountryProps> = ({ country }) => {
         onClick={() => {
           navigate(`/${encodeURIComponent(country.name.common)}`);
         }}
-        className="w-[264px] shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] rounded-[5px] bg-white dark:bg-normal-grey"
+        className="w-[264px] h-auto max-h-[450px] shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] rounded-[5px] bg-white dark:bg-normal-grey cursor-pointer"
       >
         <img
           className="w-full object-cover"

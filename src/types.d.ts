@@ -1,6 +1,8 @@
 type MainContextType = {
   countries: CountryType[];
   setCountries: Dispatch<SetStateAction<CountryType[]>>;
+  region: string;
+  setRegion: React.Dispatch<SetStateAction<string>>;
 };
 
 type CountryType = {

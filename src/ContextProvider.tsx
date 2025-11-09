@@ -4,7 +4,7 @@ import axios from "axios";
 
 const ContextProvider: React.FC<ProviderProps> = ({ children }) => {
   const [countries, setCountries] = useState<CountryType[]>([]);
-  console.log(countries);
+  const [region, setRegion] = useState<string>("");
 
   const fetchData = async () => {
     const [mainRes, extraRes] = await Promise.all([
@@ -29,7 +29,9 @@ const ContextProvider: React.FC<ProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <MainContext.Provider value={{ countries, setCountries }}>
+    <MainContext.Provider
+      value={{ countries, setCountries, region, setRegion }}
+    >
       {children}
     </MainContext.Provider>
   );
